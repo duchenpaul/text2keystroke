@@ -1,5 +1,8 @@
 # Convert the text into keystroke.
 
-Requirement:
+## Usage:
+Transform the text into keystroke, useful on the non-clipboard remote desktop.
+
+## Requirement:
 - pynput
 - pyinstaller
