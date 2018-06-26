@@ -23,7 +23,7 @@ def print_config(printFlag = None):
 		# if KEY in dict is None, cut the shortcut section name
 		if not shortcutValue.get('KEY'):
 			shortcutValue['KEY'] = shortcutName.replace('Shortcut_', '')
-		
+
 		if len(shortcutValue['KEY']) != 1:
 			print('Error found in {}, key length cannot exceed 1, current: {} '.format(shortcutName, shortcutValue['KEY']))
 		if printFlag:
@@ -52,7 +52,7 @@ def text_to_keystroke():
 	if not long_text_input_confirm(text, maxWordCount):
 		return
 
-	print(profileMode)
+	# print(profileMode)
 	if text == 'f' or profileMode == True:
 		profileMode = True
 		print('-'*40)
