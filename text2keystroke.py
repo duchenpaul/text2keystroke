@@ -45,10 +45,16 @@ def type_text(text):
 		time.sleep(interval)
 
 def text_to_keystroke():
-	text = input('Convert these text into keystroke, press <f> to go to profile mode :\n')
+	global profileMode
+	text = ''
+	if profileMode == False:
+		text = input('Convert these text into keystroke, press <f> to go to profile mode :\n') ###.strip()
 	if not long_text_input_confirm(text, maxWordCount):
 		return
-	if text == 'f':
+
+	print(profileMode)
+	if text == 'f' or profileMode == True:
+		profileMode = True
 		print('-'*40)
 		print("Enter profile mode, <ESC> quit", flush=True)
 		print('.'*40)
@@ -62,11 +68,14 @@ def text_to_keystroke():
 		type_text(text)
 
 def on_release(key):
+	global profileMode
 	print('{0} release'.format(key))
 	if key == Key.esc:
-		print('Stop listener')
+		print('Quit profile mode')
+		profileMode = False
 		# return False
-	func_key = str(key).replace('\'', '').replace('Key.', '')
+	# func_key = str(key).replace('\'', '').replace('Key.', '')
+	func_key = str(key).split('.')[-1].replace('\'', '')
 	print(len(func_key))
 
 	if func_key in keyList:
@@ -77,9 +86,10 @@ def on_release(key):
 		# keyboard.type(keyList[func_key])
 		type_text(configDict[func_key])
 	else:
-		print(func_key)
-		print('is not in')
-		print(keyList)
+		print('{} is not defined in config'.format(func_key))
+		# print(func_key)
+		# print('is not in')
+		# print(keyList)
 	return False
 
 def endless_run():
@@ -92,9 +102,7 @@ def endless_run():
 			if confirm.upper() == 'Y':
 				sys.exit(1)
 
-
-
-
+profileMode = False
 config, profile = toolkit_config.read_config()
 keyboard = Controller()
 configDict = print_config()
