@@ -1,0 +1,7 @@
+# This file is used for file mode.
+
+Test text:
+The west yet glimmers with some streaks of day. 
+Now spurs the lated traveller apace 
+To gain the timely inn.
+----- Shakespeare 

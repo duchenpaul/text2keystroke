@@ -48,7 +48,7 @@ def text_to_keystroke():
 	global profileMode
 	text = ''
 	if profileMode == False:
-		text = input('Convert these text into keystroke, press <{}> to go to profile mode :\n'.format(profileModeKey)) ###.strip()
+		text = input('Convert these text into keystroke, press <{}> to go to profile mode, <{}> to go to file mode :\n'.format(profileModeKey, fileModeKey)) ###.strip()
 	if not long_text_input_confirm(text, maxWordCount):
 		return
 
@@ -62,6 +62,16 @@ def text_to_keystroke():
 		time.sleep(.5)
 		print('-'*40)
 		profile_mode()
+	elif text == fileModeKey:
+		print('Start text file mode, reading file from {}...'.format(file_mode_src_file))
+		print('sleep {} seconds...'.format(sleepTime))
+		time.sleep(sleepTime)
+		with open(file_mode_src_file, 'r') as f:
+			for line in f.read().split('\n'):
+				type_text(line)
+				keyboard.press(Key.enter)
+				time.sleep(.1)
+			
 	else:
 		print('sleep {} seconds...'.format(sleepTime))
 		time.sleep(sleepTime)
@@ -111,6 +121,7 @@ keyList = list(configDict.keys())
 sleepTime = float(config['SLEEP_TIME'])
 interval = float(config['KEY_PRESS_INTERVAL'])
 maxWordCount = int(config['MAX_TEXT_COUNT'])
+file_mode_src_file = config['FILE_MODE_SRC_FILE']
 
 if __name__ == '__main__':
 	endless_run()   # Endless run
