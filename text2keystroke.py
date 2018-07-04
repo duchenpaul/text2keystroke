@@ -66,11 +66,18 @@ def text_to_keystroke():
 		print('Start text file mode, reading file from {}...'.format(file_mode_src_file))
 		print('sleep {} seconds...'.format(sleepTime))
 		time.sleep(sleepTime)
-		with open(file_mode_src_file, 'r') as f:
-			for line in f.read().split('\n'):
-				type_text(line)
-				keyboard.press(Key.enter)
-				time.sleep(.1)
+		try:
+			with open(file_mode_src_file, 'r') as f:
+				for line in f.read().split('\n'):
+					type_text(line)
+					keyboard.press(Key.enter)
+					time.sleep(.1)
+		except FileNotFoundError as e:
+			print('File not found, create one')
+			with open(file_mode_src_file, 'w') as f:
+				f.write('')
+		except UnicodeDecodeError as e:
+			print('Cannot read file, binary??')
 			
 	else:
 		print('sleep {} seconds...'.format(sleepTime))
