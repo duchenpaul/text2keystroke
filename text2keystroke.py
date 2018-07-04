@@ -3,12 +3,12 @@ from pynput.keyboard import Key, Controller, Listener
 import time, os, sys
 import toolkit_config
 
-
-
+profileModeKey = 'p'
+fileModeKey = 'f'
 
 def long_text_input_confirm(textInput, maxWordCount):
 	if len(textInput) > maxWordCount:
-		confirm = input('Long text detected, do you really want to input this text?  Y/N: ')
+		confirm = input('Long text ({} > {}) detected, do you really want to input this text?  Y/N: '.format(len(textInput), maxWordCount))
 		if confirm.upper() == 'N':
 			return False
 	return True
@@ -48,12 +48,12 @@ def text_to_keystroke():
 	global profileMode
 	text = ''
 	if profileMode == False:
-		text = input('Convert these text into keystroke, press <f> to go to profile mode :\n') ###.strip()
+		text = input('Convert these text into keystroke, press <{}> to go to profile mode :\n'.format(profileModeKey)) ###.strip()
 	if not long_text_input_confirm(text, maxWordCount):
 		return
 
 	# print(profileMode)
-	if text == 'f' or profileMode == True:
+	if text == profileModeKey or profileMode == True:
 		profileMode = True
 		print('-'*40)
 		print("Enter profile mode, <ESC> quit", flush=True)
