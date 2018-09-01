@@ -76,8 +76,6 @@ def text_to_keystroke():
     if profileMode == False:
         text = input('[*] Convert these text into keystroke, press <{}> to go to profile mode, <{}> to go to file mode :\n'.format(
             profileModeKey, fileModeKey))  # .strip()
-    if not long_text_input_confirm(text, maxWordCount):
-        return
 
     # print(profileMode)
     if text == profileModeKey or profileMode == True:
@@ -107,7 +105,7 @@ def text_to_keystroke():
             print('Cannot read file, binary??')
     else:
         text = get_clipboard.get_clipboard() if text == '\\' else text
-        if not text or not long_text_input_confirm(text, maxWordCount):
+        if not long_text_input_confirm(text, maxWordCount):
             return
         wait(sleepTime)
         # print(text.strip())
