@@ -143,7 +143,7 @@ def endless_run():
             flash_caps_lock_light()
             time.sleep(1)
         except KeyboardInterrupt as e:
-            confirm = input('Quit?  Y/N: ')
+            confirm = input('\nQuit?  Y/N: ')
             if confirm.upper() == 'Y':
                 sys.exit(1)
 
