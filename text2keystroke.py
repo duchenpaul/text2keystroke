@@ -66,7 +66,7 @@ def type_text(text):
 
 
 def wait(sleepTime):
-    print('sleep {} seconds...'.format(sleepTime), end = '')
+    print('sleep {} seconds...'.format(sleepTime), end = ' ', flush=True)
     time.sleep(sleepTime)
     print('Typing...')
 
