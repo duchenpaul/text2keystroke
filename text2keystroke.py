@@ -93,8 +93,8 @@ def text_to_keystroke():
         wait(sleepTime)
         try:
             with open(file_mode_src_file, 'r') as f:
-                for line in f.read().replace('\xef\xbb\xbf', '').replace('\r\n', '\n').split('\n'):
-                    type_text(line)
+                for line in f.readlines():
+                    type_text(line.replace('\n', '').replace(u'\xef\xbb\xbf',u''))
                     keyboard.press(Key.enter)
                     time.sleep(.1)
         except FileNotFoundError as e:
